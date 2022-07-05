@@ -70,14 +70,55 @@ class Field {
             }
 
         } 
-    };
+    }
 
+    static generateField(rows, columns) {
+        let newField = [];
+        for (let i = 0; i < rows ; i++) {
+            newField.push([]);
+        }; 
+        for (let j = 0; j < columns; j++) {   
+            for (let k = 0; k < rows; k++) {
+                newField[k].push(fieldCharacter);
+        };
+        };
+    
+        //starting point
+
+        newField[0][0] = pathCharacter;
+
+        // hat location
+        let hatRowCordinate = Math.floor(Math.random()*rows);
+        let hatColumnCordinate = Math.floor(Math.random()*columns)
+        
+        while (hatColumnCordinate === 0 && hatRowCordinate === 0) {
+            generateRandomCord();
+        }; 
+        
+        newField[hatRowCordinate][hatColumnCordinate] = hat;
+
+        //holes (30% percentage)
+
+        let holeCount = Math.floor(rows * columns * 0.3);
+  
+        function generateRandNum() {
+            return Math.random();
+           
+        }
+        for(let n=0; n < holeCount;n++){
+        newField[Math.floor(generateRandNum()*rows)][Math.floor(generateRandNum()*columns)] = hole;
+        }
+        return newField;
+    
+    }
+
+    generateRandomCord() {
+        hatRowCordinate = Math.floor(Math.random()*rows);
+        hatColumnCordinate = Math.floor(Math.random()*columns)
+    }
+
+    
 };
 //pomocny kod
-const novePole = new Field([
-    ['*', '^', '░'],
-    ['░', '░', '░'],
-    ['░', '░', '░']
-]);
-
-novePole.playGame();
+const testovaciePole = new Field(Field.generateField(10, 5));
+testovaciePole.playGame();
