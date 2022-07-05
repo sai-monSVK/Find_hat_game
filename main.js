@@ -106,8 +106,13 @@ class Field {
            
         }
         for(let n=0; n < holeCount;n++){
-        newField[Math.floor(generateRandNum()*rows)][Math.floor(generateRandNum()*columns)] = hole;
-        }
+            let prva = Math.floor(generateRandNum()*rows);
+            let druha = Math.floor(generateRandNum()*columns);
+            
+            if(newField[prva][druha] !== hat && newField[prva][druha] !== pathCharacter ){
+        
+            newField[prva][druha] = hole;
+        } }
         return newField;
     
     }
